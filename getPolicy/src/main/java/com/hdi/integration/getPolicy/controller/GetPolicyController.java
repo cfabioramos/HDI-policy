@@ -1,9 +1,7 @@
 package com.hdi.integration.getPolicy.controller;
 
 import com.hdi.integration.getPolicy.service.GetPolicyService;
-import com.progress.open4gl.ConnectException;
 import com.progress.open4gl.Open4GLException;
-import com.progress.open4gl.SystemErrorException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,10 +27,9 @@ public class GetPolicyController {
             @ApiParam(value = "Application ID", required = true) @RequestHeader(value = "X-Application-Id", required = true) String xApplicationId,
             @ApiParam(value = "User ID", required = true) @RequestHeader(value = "X-User-Id", required = true) String xUserId,
             @ApiParam(value = "Policy ID", required = true) @PathVariable("idInsurancePolicy") String idInsurancePolicy)
-			throws ConnectException, SystemErrorException, Open4GLException, IOException {
-				
-		// LegalProcess legalProcess = new  LegalProcessFactory().create(request, companyId, applicationId, userId);
-		// ResponseLegalProcess response = this.LegalProcessService.process(legalProcess);
+			throws Open4GLException, IOException {
+
+		this.service.getPolicyDetails(idInsurancePolicy);
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 }

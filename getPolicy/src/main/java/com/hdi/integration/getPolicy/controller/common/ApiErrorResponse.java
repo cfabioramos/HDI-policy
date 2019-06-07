@@ -11,15 +11,15 @@ public class ApiErrorResponse implements Serializable {
 
 	private static final long serialVersionUID = 6081977791291391680L;
 	
-	@ApiModelProperty(value = "Internal error ID")
+	@ApiModelProperty(value = "Error Id")
 	private Integer code;
-	@ApiModelProperty(value = "Basic message error")
-	private String message = EnumExceptionCode.BUSINESS.getDescription();
-	@ApiModelProperty(value = "Detailed error description")
+	@ApiModelProperty(value = "Error message")
+	private String message;
+	@ApiModelProperty(value = "Details")
 	private String description;
-	@ApiModelProperty(value = "List of errors")
+	@ApiModelProperty(value = "Relationship erros")
     private final List<ObjectError> errors;
-    
+
 	public ApiErrorResponse(List<ObjectError> errors) {
 		this.errors = errors;
 	}
@@ -27,6 +27,13 @@ public class ApiErrorResponse implements Serializable {
 	public ApiErrorResponse(Integer code, String description, List<ObjectError> errors) {
 		this.code = code;
 		this.description = description;
+		this.errors = errors;
+	}
+
+	public ApiErrorResponse(EnumExceptionCode enumExceptionCode, String message, List<ObjectError> errors) {
+		this.code = enumExceptionCode.getCode();
+		this.description = enumExceptionCode.getDescription();
+		this.message = message;
 		this.errors = errors;
 	}
 

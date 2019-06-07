@@ -1,9 +1,6 @@
 package com.hdi.integration.getPolicy.controller.common;
 
-import com.hdi.elaw.legal.folder.process.enumaration.EnumExceptionCode;
-import com.hdi.elaw.legal.folder.process.exception.BusinnesException;
-import com.hdi.elaw.legal.folder.process.model.ObjectError;
-import com.hdi.elaw.legal.folder.process.response.ApiErrorResponse;
+import com.hdi.integration.getPolicy.exception.BusinnesException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +11,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,15 +19,15 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(BusinnesException.class)
 	public ResponseEntity<ApiErrorResponse> businnesExceptionHandler(BusinnesException ex, HttpServletRequest request) {
-		ObjectError objectError = new ObjectError();
-		ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.BUSINESS.getCode(), ex.getMessage(), Arrays.asList(objectError));
-		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.INTERNAL_BUSINESS, ex.getMessage(), null);
+		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<ObjectError> errors = getErrors(ex);
-        ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.REQUIRED_FIELD.getCode(), EnumExceptionCode.REQUIRED_FIELD.getDescription(), errors);
+        ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.DATA_INVALID, "", errors);
         return new ResponseEntity<>(response, status);
     }
 

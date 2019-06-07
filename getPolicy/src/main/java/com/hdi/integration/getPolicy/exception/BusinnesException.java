@@ -2,7 +2,7 @@ package com.hdi.integration.getPolicy.exception;
 
 public class BusinnesException extends RuntimeException {
 
-	private static final long serialVersionUID = -5712853377805711491L;
+	private static final long serialVersionUID = 1L;
 
 	private String message;
 	

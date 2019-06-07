@@ -10,9 +10,9 @@ public class ObjectError implements Serializable {
 
 	private static final long serialVersionUID = -7236760757579754892L;
 	
-	@ApiModelProperty(value = "Id of the technical exception")
-	private Integer code = 0;	
-	@ApiModelProperty(value = "Technical message")
+	@ApiModelProperty(value = "Error ID")
+	private Integer code = 0;
+	@ApiModelProperty(value = "Error message")
 	private String message = "";	
 	@ApiModelProperty(value = "Native error message")
 	private String nativeMessage = "";	
