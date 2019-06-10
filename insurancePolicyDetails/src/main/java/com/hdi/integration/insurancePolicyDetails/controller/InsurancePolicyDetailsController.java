@@ -30,6 +30,7 @@ public class InsurancePolicyDetailsController {
 			throws Open4GLException, IOException {
 
 		this.service.getInsurancePolicyDetails(idInsurancePolicy);
+
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 }

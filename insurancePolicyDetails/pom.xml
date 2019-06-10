@@ -12,7 +12,7 @@
 	<artifactId>insurancePolicyDetails</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>insurancePolicyDetails</name>
-	<description>Microservice that groups Policy's GETs</description>
+	<description>Microservice that groups Insurance Policy's enrichment APIs</description>
 
 	<properties>
 		<java.version>1.8</java.version>

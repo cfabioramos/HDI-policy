@@ -6,10 +6,7 @@ public enum EnumExceptionCode {
 	UNAUTHORIZED(401, "Unauthorized"),
 	FORBIDDEN(403, "Forbidden"),
 	DATA_NOT_FOUND(404, "Data not found"),
-	DATA_INVALID(405, "Data input not supplied or invalid"),
-
-	INTERNAL_BUSINESS(500, "A business exception occurred");
-
+	DATA_INVALID(405, "Data input not supplied or invalid");
 
 	EnumExceptionCode(int code, String description) {
 		this.code = code;

@@ -19,7 +19,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(BusinnesException.class)
 	public ResponseEntity<ApiErrorResponse> businnesExceptionHandler(BusinnesException ex, HttpServletRequest request) {
-		ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.INTERNAL_BUSINESS, ex.getMessage(), null);
+		ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.DATA_INVALID, ex.getMessage(), null);
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
