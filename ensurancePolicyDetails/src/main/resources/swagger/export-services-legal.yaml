@@ -1,0 +1,185 @@
+swagger: "2.0"
+info:
+  description: "Domain Services Policy"
+  version: "1.0.0"
+  title: "Domain Services Policy"
+host: "api-desenv.hdi.com.br"
+basePath: "/getPolicy/v1"
+tags:
+- name: "policy"
+  description: "Policy Entity Management"
+schemes:
+- "https"
+
+parameters:
+  CompanyIdHeaderParam:
+    in: "header"
+    name: "X-Company-Id"
+    required: true
+    type: "string"
+    description: "Company ID"     
+  ApplicationIdHeaderParam:
+    in: "header"
+    name: "X-Application-Id"
+    required: true
+    type: "string"
+    description: "Application ID"
+  UserIdHeaderParam:
+    in: "header"
+    name: "X-User-Id"
+    required: true
+    type: "string"
+    description: "User ID"    
+
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: "https://login-desenv.hdi.com.br/corporativo/autenticacao/oauth/authorize"
+    tokenUrl: "https://login-desenv.hdi.com.br/corporativo/autenticacao/oauth/token"
+
+responses:
+  200-Ok:
+    description: "Ok"
+  204-NoContent:
+    description: "No content"
+  400-BadRequest:
+    description: "Bad request"
+  401-Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: "#/definitions/ApiErrorResponse"    
+  403-Forbidden:
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/ApiErrorResponse"            
+  404-DataNotFound:
+    description: "Data not found"
+    schema:
+      $ref: "#/definitions/ApiErrorResponse"
+  405-DataInvalid:
+    description: "Data input not supplied or invalid"
+    schema:
+      $ref: "#/definitions/ApiErrorResponse"                  
+  406-Exception:
+    description: "Exception"
+    schema:
+      $ref: "#/definitions/ApiErrorResponse"            
+
+paths:
+  /process:
+    post:
+      tags:
+      - "legal"
+      summary: "Add New Legal"
+      description: "New Legal"
+      operationId: "POST /addProcess"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: '#/parameters/CompanyIdHeaderParam'
+      - $ref: '#/parameters/ApplicationIdHeaderParam'
+      - $ref: '#/parameters/UserIdHeaderParam'
+      - in: "body"
+        name: "body"
+        description: "Legal Process"
+        required: true
+        schema:
+          $ref: "#/definitions/LegalProcessRequest"
+      responses:
+        200:
+          description: "Ok"
+          schema:       
+            $ref: "#/definitions/ResponseLegalProcess"
+        204:
+          $ref: "#/responses/204-NoContent"
+        400:               
+          $ref: "#/responses/400-BadRequest"   
+        401:               
+          $ref: "#/responses/401-Unauthorized"   
+        403:
+          $ref: "#/responses/403-Forbidden"
+        404:
+          $ref: "#/responses/404-DataNotFound"          
+        405:
+          $ref: "#/responses/405-DataInvalid"
+        406:
+           $ref: "#/responses/406-Exception"
+      security:
+        - OAuth2: []            
+            
+definitions:   
+  ObjectError:
+    type: "object"
+    description: "Error Enitity"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        description: "Id of the technical exception"
+      message:
+        type: "string"
+        description: "Technical message"
+      nativeMessage:
+        type: "string"
+        description: "Native error message"                
+      trackid:
+        type: "string"
+        description: "Track id of transaction process"                
+  ApiErrorResponse:
+    type: "object"
+    description: "Error API responses"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        description: "Internal error ID"
+      message:
+        type: "string"
+        description: "Basic message error"
+      description:
+        type: "string"
+        description: "Detailed error description"
+      errors:
+        type: "array"
+        description: "List of errors"
+        items:
+          $ref: "#/definitions/ObjectError"
+  LegalProcessRequest:
+    type: "object"
+    description: "Legal Process Start"
+    properties:
+      authorName:
+        type: "string"
+        description: "Name of Author of the Processs"
+      defendantName:
+        type: "string"
+        description: "Name of Defendant of the Process"
+      lawyerCode:
+        type: "string"
+        description: "Lawyer code of the Process"
+      processCode:
+        type: "string"
+        description: "Process code of the Process"
+      district:
+        type: "string"
+        description: "District of the process"
+      branch:
+        type: "string"
+        description: "Branch of the process"
+      portifolio:
+        type: "string"
+        description: "Portifolio of the process"
+      line:
+        type: "string"
+        description: "Line of the process"  
+        
+  ResponseLegalProcess:
+    type: "object"
+    description: "Legal Process Created"
+    properties:
+      processLegalNumber:
+        type: "string"
+        description: "Process Legel Number"
