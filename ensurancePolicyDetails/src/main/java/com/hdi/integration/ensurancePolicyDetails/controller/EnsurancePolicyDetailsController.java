@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/getPolicy")
+@RequestMapping(value = "/insurancepolicy")
 @Api(description = "Legal Entity Management")
 public class GetPolicyController {
 
