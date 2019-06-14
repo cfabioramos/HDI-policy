@@ -26,11 +26,9 @@ public class InsurancePolicyDetailsController {
             @ApiParam(value = "Company ID", required = true) @RequestHeader(value = "X-Company-Id", required = true) String xCompanyId,
             @ApiParam(value = "Application ID", required = true) @RequestHeader(value = "X-Application-Id", required = true) String xApplicationId,
             @ApiParam(value = "User ID", required = true) @RequestHeader(value = "X-User-Id", required = true) String xUserId,
-            @ApiParam(value = "Policy ID", required = true) @PathVariable("idInsurancePolicy") String idInsurancePolicy)
+			@ApiParam(value = "Insurance policy ID", required = true) @PathVariable("idInsurancePolicy") Long idInsurancePolicy)
 			throws Open4GLException, IOException {
 
-		this.service.getInsurancePolicyDetails(idInsurancePolicy);
-
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		return new ResponseEntity<>(this.service.getInsurancePolicyDetails(idInsurancePolicy), HttpStatus.OK);
 	}
 }

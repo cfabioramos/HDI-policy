@@ -1,5 +1,8 @@
 package com.hdi.integration.insurancePolicyDetails.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -22,6 +25,15 @@ public class ObjectConverter {
                 converters.put(method.getName(), method);
             }
         }
+    }
+
+    public static String getJsonFromObject(Object from) {
+        try {
+            return new ObjectMapper().writeValueAsString(from);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static <T> T convert(Object from, Class<T> toClass) {
