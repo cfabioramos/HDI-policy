@@ -20,10 +20,15 @@ public class Document   {
 
   public Document(){}
 
-  public Document(String number){
+  public Document(String id, String number){
+    this.type = new DomainData();
+    this.number = number;
+  }
+
+  public Document(String cpfNumber){
     this.type = new DomainData();
     this.type.setId("0");
-    this.number = number;
+    this.number = cpfNumber;
   }
 
   @JsonProperty("type")

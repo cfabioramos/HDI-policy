@@ -19,9 +19,9 @@ public class InsurancePolicyDetailsService {
 	@Autowired
 	private InsurancePolicyDetailsRepository repository;
 
-	public InsurancePolicy getInsurancePolicyDetails(Long idInsurancePolicy) throws Open4GLException, IOException {
+	public InsurancePolicy findInsurancePolicyById(Long idInsurancePolicy) throws Open4GLException, IOException {
 
-        Map<String, Object> mapRet = repository.getInsurancePolicyDetails(new PDocument(idInsurancePolicy));
+        Map<String, Object> mapRet = repository.findInsurancePolicyById(new PDocument(idInsurancePolicy));
 //        ((Map)((List)mapRet.get("tt_retorno")).get(0)).get("tipoProduto");
 //        ((Map)((List)mapRet.get("tt_cobranca")).get(0)).get("numeroApolice");
 //        ((Map)((List)mapRet.get("tt_cobranca")).get(1)).get("numeroApolice");

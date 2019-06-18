@@ -29,6 +29,6 @@ public class InsurancePolicyDetailsController {
 			@ApiParam(value = "Insurance policy ID", required = true) @PathVariable("idInsurancePolicy") Long idInsurancePolicy)
 			throws Open4GLException, IOException {
 
-		return new ResponseEntity<>(this.service.getInsurancePolicyDetails(idInsurancePolicy), HttpStatus.OK);
+		return new ResponseEntity<>(this.service.findInsurancePolicyById(idInsurancePolicy), HttpStatus.OK);
 	}
 }

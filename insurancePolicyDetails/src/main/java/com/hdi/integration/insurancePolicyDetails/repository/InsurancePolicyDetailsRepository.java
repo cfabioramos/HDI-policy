@@ -22,7 +22,7 @@ public class InsurancePolicyDetailsRepository {
 	
 	private static String PROC_NAME = "msvc_det_documento.p";
 	
-	public Map<String, Object> getInsurancePolicyDetails(PDocument pDocument) throws Open4GLException, IOException {
+	public Map<String, Object> findInsurancePolicyById(PDocument pDocument) throws Open4GLException, IOException {
 
 		Connection progressConnection = null;
 
